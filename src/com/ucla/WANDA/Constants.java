@@ -33,7 +33,7 @@ public final class Constants {
 	public static String AUDIO_FOLDER_PATH = "/WANDA/VOICE";
 	
 	// Accelerometer Sampling rate
-	public static int ACC_SAMPLE_WINDOW = 5;	// Sampling Period. Seconds
+	public static int ACC_SAMPLE_WINDOW = 60;	// Sampling Period. Seconds
 	public static int UPLOAD_PERIOD = 300;		// Seconds
 	
 	// Rules
