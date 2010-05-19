@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+
+
+	<LinearLayout android:orientation="horizontal"
+		android:layout_width="wrap_content" android:layout_height="wrap_content">
+		<TextView android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:text="Age:			"
+			android:textSize="25px" android:textStyle="bold" />
+
+		<EditText android:id="@+id/userAge" android:layout_height="wrap_content"
+			android:editable="true" android:layout_width="80px" />
+	</LinearLayout>
+
+	<LinearLayout android:orientation="horizontal"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:layout_marginTop="20px">
+		<TextView android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:text="Height:	"
+			android:textSize="25px" android:textStyle="bold" />
+
+		<EditText android:id="@+id/userHeight" android:layout_width="100px"
+			android:layout_height="wrap_content" />
+		<TextView android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:text="cm	"
+			android:textSize="25px" android:textStyle="bold" />
+	</LinearLayout>
+
+	<LinearLayout android:orientation="horizontal"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:layout_marginTop="20px">
+		<TextView android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:text="Weight:	"
+			android:textSize="25px" android:textStyle="bold" />
+		<EditText android:id="@+id/userWeight" android:layout_width="100px"
+			android:layout_height="wrap_content" />
+		<TextView android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:text="Kg	"
+			android:textSize="25px" android:textStyle="bold" />
+	</LinearLayout>
+
+	<LinearLayout android:orientation="horizontal"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:layout_marginTop="20px">
+		<TextView android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:text="Gender:"
+			android:textSize="25px" android:textStyle="bold" />
+
+		<RadioGroup android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:orientation="horizontal"
+			android:id="@+id/genderRadioGroup" android:layout_gravity="top|fill_horizontal">
+
+			<RadioButton android:id="@+id/maleButton"
+				android:bufferType="editable" android:clickable="true" android:text="Male"
+				android:checked="false" android:layout_marginLeft="30px">
+			</RadioButton>
+
+			<RadioButton android:bufferType="editable" android:id="@+id/femaleButton"
+				android:text="Female" android:clickable="true" android:checked="false">
+			</RadioButton>
+		</RadioGroup>
+	</LinearLayout>
+
+	<LinearLayout android:orientation="horizontal"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:layout_marginTop="20px">
+		<TextView android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:text="MET:	"
+			android:textSize="25px" android:textStyle="bold" />
+		<TextView android:layout_width="fill_parent" android:id="@+id/metView"
+			android:layout_height="wrap_content" android:textSize="25px"
+			android:textStyle="bold" />
+	</LinearLayout>
+
+	<LinearLayout android:orientation="horizontal"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:layout_marginTop="20px">
+
+		<Button android:text="Update" android:id="@+id/updateButton"
+			android:layout_width="wrap_content" android:layout_height="wrap_content">
+		</Button>
+	</LinearLayout>
+</LinearLayout>

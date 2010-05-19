@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+	<PreferenceCategory android:title="Automatic Recording">
+		<CheckBoxPreference
+			android:key="checkbox_preference"
+			android:title="Automatic Recording"
+			android:summary="Set Automatic recording"
+			android:defaultValue="true"
+		/>
+	</PreferenceCategory>
+	<PreferenceCategory android:title="Alarm Setting">
+		<CheckBoxPreference
+			android:key="checkbox_preference2"
+			android:title="Alarm On/Off"
+			android:summary="Setting Alarm On/Off"
+			android:defaultValue="true"/>
+	</PreferenceCategory>
+</PreferenceScreen>

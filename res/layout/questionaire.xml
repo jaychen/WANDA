@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+	<PreferenceCategory android:title="Question 1">
+		<ListPreference
+			android:key="list_preference1"
+			android:title="I could feel my heart beat faster"
+			android:entries="@array/questions_list_preference"
+			android:entryValues="@array/questionsvalues_list_preference"
+			android:dialogTitle="I could feel my heart beat faster"/>
+	</PreferenceCategory>
+	<PreferenceCategory android:title="Question 2">
+		<ListPreference
+			android:key="list_preference2"
+			android:title="I could not breathe when I laid down"
+			android:entries="@array/questions_list_preference"
+			android:entryValues="@array/questionsvalues_list_preference"
+			android:dialogTitle="I could not breathe when I laid down"/>
+	</PreferenceCategory>
+	<PreferenceCategory android:title="Question 3">
+		<ListPreference
+			android:key="list_preference3"
+			android:title="I felt pain in my chest"
+			android:entries="@array/questions_list_preference"
+			android:entryValues="@array/questionsvalues_list_preference"
+			android:dialogTitle="I felt pain in my chest"/>
+	</PreferenceCategory>
+	<PreferenceCategory android:title="Question 4">
+		<ListPreference
+			android:key="list_preference4"
+			android:title="I had an upset stomach"
+			android:entries="@array/questions_list_preference"
+			android:entryValues="@array/questionsvalues_list_preference"
+			android:dialogTitle="I had an upset stomach"/>
+	</PreferenceCategory>
+	<PreferenceCategory android:title="Question 5">
+		<ListPreference
+			android:key="list_preference5"
+			android:title="I had a cough"
+			android:entries="@array/questions_list_preference"
+			android:entryValues="@array/questionsvalues_list_preference"
+			android:dialogTitle="I had a cough"/>
+	</PreferenceCategory>
+	<PreferenceCategory android:title="Question 6">
+		<ListPreference
+			android:key="list_preference6"
+			android:title="I was tired"
+			android:entries="@array/questions_list_preference"
+			android:entryValues="@array/questionsvalues_list_preference"
+			android:dialogTitle="I was tired"/>
+	</PreferenceCategory>
+	<PreferenceCategory android:title="Question 7">
+		<ListPreference
+			android:key="list_preference7"
+			android:title="I could not catch my breath"
+			android:entries="@array/questions_list_preference"
+			android:entryValues="@array/questionsvalues_list_preference"
+			android:dialogTitle="I could not catch my breath"/>
+	</PreferenceCategory>
+	<PreferenceCategory android:title="Question 8">
+		<ListPreference
+			android:key="list_preference8"
+			android:title="My feet were swollen"
+			android:entries="@array/questions_list_preference"
+			android:entryValues="@array/questionsvalues_list_preference"
+			android:dialogTitle="My feet were swollen"/>
+	</PreferenceCategory>
+	<PreferenceCategory android:title="Question 9">
+		<ListPreference
+			android:key="list_preference9"
+			android:title="I woke up at night because I could not breathe"
+			android:entries="@array/questions_list_preference"
+			android:entryValues="@array/questionsvalues_list_preference"
+			android:dialogTitle="I woke up at night because I could not breathe"/>
+	</PreferenceCategory>
+	<PreferenceCategory android:title="Question 10">
+		<ListPreference
+			android:key="list_preference10"
+			android:title="My shoes were tighter than usual"
+			android:entries="@array/questions_list_preference"
+			android:entryValues="@array/questionsvalues_list_preference"
+			android:dialogTitle="My shoes were tighter than usual"/>
+	</PreferenceCategory>
+	<PreferenceCategory android:title="Question 11">
+		<ListPreference
+			android:key="list_preference11"
+			android:title="I gained 3 or more pounds in the past week"
+			android:entries="@array/questions_list_preference"
+			android:entryValues="@array/questionsvalues_list_preference"
+			android:dialogTitle="I gained 3 or more pounds in the past week"/>
+	</PreferenceCategory>
+	<PreferenceCategory android:title="Question 12">
+		<ListPreference
+			android:key="list_preference12"
+			android:title="I could not do my usual daily activities because I was"
+			android:entries="@array/questions_list_preference"
+			android:entryValues="@array/questionsvalues_list_preference"
+			android:dialogTitle="I could not do my usual daily activities because I was"/>
+	</PreferenceCategory>
+	<PreferenceCategory android:title="Question 13">
+		<ListPreference
+			android:key="list_preference13"
+			android:title="short of breath"
+			android:entries="@array/questions_list_preference"
+			android:entryValues="@array/questionsvalues_list_preference"
+			android:dialogTitle="short of breath"/>
+	</PreferenceCategory>
+</PreferenceScreen>

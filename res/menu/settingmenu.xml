@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android">
+  		<item
+  			android:id="@+id/advancedsetting"
+  			android:title="Advanced Setting"
+  			android:orderInCategory="1"
+  			android:icon="@drawable/settings"
+  		/>
+  		<item
+  			android:id="@+id/closeprogram"
+  			android:title="Log out"
+  			android:orderInCategory="2"
+  			android:icon="@drawable/close"
+  		/>
+</menu>

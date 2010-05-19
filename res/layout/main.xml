@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+	android:layout_width="fill_parent" 
+   	android:layout_height="fill_parent" 
+   	android:orientation="vertical">
+	<TextView
+     	android:text="WANDA Wireless Health"
+      	android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="10px"
+		android:textSize="30px"
+		android:textColor="@android:color/white"
+		android:textStyle="bold|italic"
+		android:gravity="center"
+		android:layout_centerHorizontal="true"		
+     />
+	<LinearLayout
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content">
+          <Button
+				android:id="@+id/record_button"
+				android:background="@drawable/record"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="50px"
+				android:layout_marginLeft="10px"
+				/>
+     	  <Button
+				android:id="@+id/history_button"
+				android:background="@drawable/history"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="50px"
+				/>
+</LinearLayout>
+		<TextView 
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content" 
+		android:layout_gravity="center"
+		android:layout_marginTop="50px" 
+		android:clickable="false" 
+		android:focusable="false" 
+		android:textSize="18px" 
+		android:id="@+id/TextView03" 
+		android:text="Welcome, not set">
+		</TextView>
+</LinearLayout> 

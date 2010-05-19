@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string-array name="entries_list_preference">
+		<item>Sound   </item>
+		<item>Vibrate </item>
+		<item>Blinking</item>
+		<item>No Alarm</item>
+	</string-array>
+
+	<string-array name="entryvalues_list_preference">
+		<item>soundonly</item>
+		<item>vibrateonly</item>
+		<item>blinkingonly</item>
+		<item>noalarm</item>
+	</string-array>
+	
+	<string-array name="questions_list_preference">
+		<item>0 : Not at all</item>
+		<item>1 : A little</item>
+		<item>2 : A great deal</item>
+		<item>3 : Extremely</item>
+	</string-array>
+	
+	<string-array name="questionsvalues_list_preference">
+		<item>0 : Not at all</item>
+		<item>1 : A little</item>
+		<item>2 : A great deal</item>
+		<item>3 : Extremely</item>
+	</string-array>
+	
+	
+</resources>
