@@ -23,9 +23,10 @@ public class BTService {
 	private AcceptThread mAcceptThread;
 	private BluetoothDevice device;
 
+	public static final int CONN_ESTABLISHED = 1;
 	public static final int MESSAGE_READ = 2;
 	public static final int MESSAGE_WRITE = 3;
-	private static final int CONNECTION_LOST = 4;
+	public static final int CONNECTION_LOST = 4;
 
 	private final Handler mHandler;
 
@@ -270,7 +271,11 @@ public class BTService {
 				deviceNumber=Constants.DEVICE_TYPE_SCALE;
 			else if(remoteDevice.indexOf("AND")>=0)
 				deviceNumber=Constants.DEVICE_TYPE_BP;
+			else if(remoteDevice.indexOf("myglucohealth")>=0)
+				deviceNumber=Constants.DEVICE_TYPE_MGH;
 			Log.v("JAY", "Remote Device Name: " + remoteDevice + " Num: " + deviceNumber);
+			
+			mHandler.obtainMessage(BTService.CONN_ESTABLISHED, deviceNumber).sendToTarget();
 
 			mmInStream = tmpIn;
 			mmOutStream = tmpOut;
@@ -289,11 +294,11 @@ public class BTService {
 				try {
 					// Read from the InputStream
 					bytes = mmInStream.read(buffer);
-					//String str = new String(buffer, 0, bytes);
-					// Log.v("JAY", "Thanks God!" + str);
+					String str = new String(buffer, 0, bytes);
+					Log.v("JAY", "Thanks God!" + str);
 					// Send the obtained bytes to the UI Activity.
 
-					mHandler.obtainMessage(MESSAGE_READ, bytes, deviceNumber,
+					mHandler.obtainMessage(BTService.MESSAGE_READ, bytes, deviceNumber,
 							buffer).sendToTarget();
 				} catch (IOException e) {
 					Log.e("JAY", "Connection with Device " + deviceNumber

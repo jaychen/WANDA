@@ -29,9 +29,6 @@ import com.ucla.WANDA.WandaFile;
 public class Measurement extends Activity {
 
 	private static final int REQUEST_ENABLE_BT = 2;
-	public static final int MESSAGE_READ = 2;
-	public static final int MESSAGE_WRITE = 3;
-	private static final int CONNECTION_LOST = 4;
 
 	private TextView bpTV, scaleTV;	
 	private String scaleStr = "";
@@ -132,13 +129,28 @@ public class Measurement extends Activity {
 		@Override
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
-			case MESSAGE_WRITE:
+			case BTService.CONN_ESTABLISHED:
+				Integer devNum = (Integer) msg.obj;
+				if(devNum==Constants.DEVICE_TYPE_MGH){
+					Log.v("JAY", "Parsing MGH!");
+					Integer a = new Integer(0X00);
+					byte[] send = new byte[1];
+					send[0]=a.byteValue();
+					try {
+						Thread.sleep(500);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					mChatService.write(send);
+				}
+				break;
+			case BTService.MESSAGE_WRITE:
 				byte[] writeBuf = (byte[]) msg.obj;
 				// construct a string from the buffer
 				String writeMessage = new String(writeBuf);
 				Log.v("JAY", "Write: " + writeMessage);
 				break;
-			case MESSAGE_READ:
+			case BTService.MESSAGE_READ:
 				byte[] readBuf = (byte[]) msg.obj;
 
 				//Log.v("JAY", "Read " + msg.arg1 + " Bytes");				
@@ -146,18 +158,25 @@ public class Measurement extends Activity {
 					parseBP(readBuf, msg.arg1);
 				else if (msg.arg2 == Constants.DEVICE_TYPE_SCALE)
 					parseScale(readBuf, msg.arg1);
+				else if (msg.arg2 == Constants.DEVICE_TYPE_MGH)
+					parseMGH(readBuf, msg.arg1);
 				break;
-			case CONNECTION_LOST:
+			case BTService.CONNECTION_LOST:
 				Toast.makeText(getBaseContext(), "Connection Lost",
 						Toast.LENGTH_SHORT).show();
 				// Write File
 				// weightFile.writeData(weightData);
 				mChatService.stop();
 				//mChatService.start();
+				
 				break;
 			}
 		}
 	};
+	
+	private void parseMGH(byte[] in, int length){
+		Log.v("JAY", getHexString(in, length));
+	}
 
 	private void parseBP(byte[] in, int length) {
 		SampleValues v = new SampleValues(Constants.DEVICE_TYPE_BP);
