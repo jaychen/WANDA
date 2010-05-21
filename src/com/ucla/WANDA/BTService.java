@@ -294,8 +294,8 @@ public class BTService {
 				try {
 					// Read from the InputStream
 					bytes = mmInStream.read(buffer);
-					String str = new String(buffer, 0, bytes);
-					Log.v("JAY", "Thanks God!" + str);
+					//String str = new String(buffer, 0, bytes);
+					//Log.v("JAY", "Thanks God!" + str);
 					// Send the obtained bytes to the UI Activity.
 
 					mHandler.obtainMessage(BTService.MESSAGE_READ, bytes, deviceNumber,

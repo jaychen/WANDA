@@ -1,5 +1,6 @@
 package com.ucla.WANDA.record;
 
+import java.util.BitSet;
 import java.util.Set;
 
 import android.app.Activity;
@@ -32,6 +33,8 @@ public class Measurement extends Activity {
 
 	private TextView bpTV, scaleTV;	
 	private String scaleStr = "";
+	private byte[] MGHData = new byte[13];
+	private int MGHByteCount=0;
 	// Create a SampleValues object used to pass data
 	private SampleValues scaleV = new SampleValues(Constants.DEVICE_TYPE_SCALE);
 	
@@ -132,23 +135,15 @@ public class Measurement extends Activity {
 			case BTService.CONN_ESTABLISHED:
 				Integer devNum = (Integer) msg.obj;
 				if(devNum==Constants.DEVICE_TYPE_MGH){
-					Log.v("JAY", "Parsing MGH!");
-					Integer a = new Integer(0X00);
-					byte[] send = new byte[1];
-					send[0]=a.byteValue();
-					try {
-						Thread.sleep(500);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					mChatService.write(send);
+					sendMGHCommand();
 				}
 				break;
 			case BTService.MESSAGE_WRITE:
 				byte[] writeBuf = (byte[]) msg.obj;
+				getHexString(writeBuf, writeBuf.length);
 				// construct a string from the buffer
-				String writeMessage = new String(writeBuf);
-				Log.v("JAY", "Write: " + writeMessage);
+				//String writeMessage = new String(writeBuf);
+				Log.v("JAY", "Write: " + getHexString(writeBuf, writeBuf.length));
 				break;
 			case BTService.MESSAGE_READ:
 				byte[] readBuf = (byte[]) msg.obj;
@@ -174,8 +169,106 @@ public class Measurement extends Activity {
 		}
 	};
 	
+	private void sendMGHCommand(){
+		byte STX = (byte) 0x80;
+		byte CMD_RECORD = (byte)0x01;
+		int recordsCount =0;	// Index of the record to be read. 0 is the first data, 1 is the second data
+		
+		byte  sc_sendBuf[] = new byte[7];	    
+		
+	    sc_sendBuf[0] = STX;	//STX = (byte) 0x80
+        sc_sendBuf[1] = (byte)0x02;//size
+        sc_sendBuf[2] = (byte) ~ ( sc_sendBuf[1] );//~size
+        sc_sendBuf[3] = CMD_RECORD;//command = (byte)0x01
+        sc_sendBuf[4] = (byte)recordsCount;//data
+        sc_sendBuf[5] = (byte) ~((sc_sendBuf[0] ^ sc_sendBuf[2]) ^sc_sendBuf[4]); //checksum L
+        sc_sendBuf[6] = (byte) ~(sc_sendBuf[1] ^ sc_sendBuf[3]); // checksum H
+        
+        try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+        mChatService.write(sc_sendBuf);        
+		
+		
+	}
+	
+	private String printByte(byte b){
+		String str = "";
+		for(int i=0; i<8; i++){
+			if((b & 1)==1)
+				str = "1"+str;
+			else
+				str = "0"+str;
+			b >>= 1;
+		}		
+		return str;
+	}
+	
 	private void parseMGH(byte[] in, int length){
-		Log.v("JAY", getHexString(in, length));
+		// Append bytes
+		for(int i=0; i<length; i++ ){
+			//Log.v("JAY",printByte(in[i]));
+			MGHData[MGHByteCount++]=in[i];	
+			Log.v("JAY",printByte(MGHData[MGHByteCount-1]));
+		}
+		
+		if(MGHByteCount >= 13){
+			// Convert Byte[] to bitset
+			BitSet bits = new BitSet();			
+			for (int i=0; i<MGHData.length*8; i++) {
+		        if ((MGHData[i/8]>>(7-i%8)&1) > 0) {
+		            bits.set(i, true);		           
+		        }
+		        else
+		        	 bits.set(i, false);
+		    }
+			Log.v("JAY", "Bits: " + bits.toString());
+			BitSet r = new BitSet(1);
+			bits.get(0, 7+1);	// STX, 1Byte
+						
+			r=bits.get(8, 15+1); // Size, 1Byte
+			Log.v("JAY", "Size: " + bitSetToInt(r,8));
+			
+			bits.get(16, 23+1); // ~Size, 1Byte
+			
+			bits.get(24, 31+1); // Command, 1Byte
+			bits.get(32, 39+1); // recordCount
+			// Data
+			r=bits.get(40, 46+1); // Year, 7bits
+			
+			
+			bits.get(47, 50+1); // Month, 4bits
+			bits.get(51, 55+1); // Day, 5bits
+			bits.get(56, 61+1); // Temp, 6bits
+			r = bits.get(62, 71+1); // Result, 10bits
+			Log.v("JAY", "Result: " + bitSetToInt(r,10));
+			bits.get(72, 76+1); // Range, 5bits
+			bits.get(77, 81+1); // Hour, 5bits
+			bits.get(82, 87+1); // Min, 6 bits
+			// Check Sum
+			bits.get(88, 95+1); // Check Sum Low, 1Byte
+			bits.get(96, 103+1); // Check Sum High, 1Byte
+			
+			//Log.v("JAY", "Result: " + bitSetToInt(r));
+			
+			MGHByteCount=0;
+			MGHData = new byte[13];
+		}
+				
+	}
+	
+	private int bitSetToInt(BitSet set, int len){
+		//Log.v("JAY","betset-> "+ set.toString());
+		int sum = 0;
+		len--;	
+		for(int i=0; i<=len; i++){
+			if(set.get(i))			
+				sum += Math.pow(2, len-i);
+		}		
+		return sum;
 	}
 
 	private void parseBP(byte[] in, int length) {
